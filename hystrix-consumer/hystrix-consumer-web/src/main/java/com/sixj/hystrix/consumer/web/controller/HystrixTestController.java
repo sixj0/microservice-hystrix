@@ -1,5 +1,6 @@
 package com.sixj.hystrix.consumer.web.controller;
 
+import com.sixj.hystrix.consumer.web.service.GlobalFallBackService;
 import com.sixj.hystrix.consumer.web.service.HystrixService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,8 @@ public class HystrixTestController {
 
     @Autowired
     private HystrixService hystrixService;
+    @Autowired
+    private GlobalFallBackService globalFallBackService;
 
     @GetMapping("/handleSuccess")
     public String handleSuccess(){
@@ -28,4 +31,11 @@ public class HystrixTestController {
         String s = hystrixService.handleTimeOut();
         return s;
     }
+
+    @GetMapping("/globalFallBackTimeOut")
+    public String globalFallBackTimeOut(){
+        String s = globalFallBackService.handleTimeOut();
+        return s;
+    }
+
 }
